@@ -1,28 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using Telegram.Bot;
 
 namespace TelegramBot
 {
     class Program
     {
-        static TelegramBotClient bot;
-        static void Main(string[] args)
+        static void Main()
         {
-            string token = "";
-
-            bot = new TelegramBotClient(token);
-
-            bot.OnMessage += MesssageListener;
-
-            bot.StartReceiving();
-
-            Console.ReadKey();
+            BotClient client = new BotClient("1459208947:AAF4btGXyWkEQIW21eMMs0t38fWtnY6fGyQ");
+            while (true)
+            {
+                Console.WriteLine("Бот работает. Для прекращения введите exit:");
+                if (Console.ReadLine() == "exit")
+                {
+                    break;
+                }
+            }
         }
-
-        private static void MesssageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
-        {
-            var message = e.Message;
-            
-        }
+        
+        
+        
     }
 }
