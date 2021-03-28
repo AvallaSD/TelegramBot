@@ -33,6 +33,7 @@ namespace TelegramBot
         /// <param name="token">Токен бота</param>
         public BotClient(string token)
         {
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\\files\\");
             bot = new TelegramBotClient(token);
             bot.OnMessage += MessageListener;
             activeChats = new List<long>();
