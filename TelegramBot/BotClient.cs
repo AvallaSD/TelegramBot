@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Telegram.Bot;
+using Telegram.Bot.Args;
 using Telegram.Bot.Types.InputFiles;
 
 namespace TelegramBot
@@ -10,7 +11,7 @@ namespace TelegramBot
     /// <summary>
     /// Класс бота-клиета. Содержит методы работы с ботом в рамках поставленной задачи
     /// </summary>
-    class BotClient
+    public class BotClient
     {
         /// <summary>
         /// Активные чаты с ботом
@@ -40,6 +41,7 @@ namespace TelegramBot
             filesNames = new List<string>();
             RefreshFilesInfo();
             bot.StartReceiving();
+           
         }
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace TelegramBot
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MessageListener(object sender, Telegram.Bot.Args.MessageEventArgs e)
+        private void MessageListener(object sender, MessageEventArgs e)
         {
             var message = e.Message;
 
@@ -254,6 +256,15 @@ namespace TelegramBot
                 indexes.Clear();
             }
             return indexes;
+        }
+        public void SendMessage(long chatID, string message)
+        {
+            bot.SendTextMessageAsync(chatID, message);
+        }
+
+        public void AddListener(EventHandler<MessageEventArgs> handler)
+        {
+            bot.OnMessage += handler;
         }
 
     }
